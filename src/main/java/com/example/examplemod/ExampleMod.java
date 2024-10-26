@@ -25,13 +25,19 @@ public class ExampleMod  {
         LOGGER.info("HELLO from server starting");
     }
 
+    @SubscribeEvent
+    public static void onLootTableLoad(LootTableLoadEvent event) {
+        LOGGER.info("HELLO FROM LOOT TABLE LOAD EVENT - FROM MAIN CLASS");
+        LOGGER.info("LOOT TABLE: {}", event.getTable().getLootTableId());
+    }
+
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-    public static class GameEvents {
+    public static class EventsOnForgeBus {
 
         @SubscribeEvent
         public static void onLootTableLoad(LootTableLoadEvent event) {
             // Some client setup code
-            LOGGER.info("HELLO FROM LOOT TABLE LOAD EVENT");
+            LOGGER.info("HELLO FROM LOOT TABLE LOAD EVENT - FROM SEPERATE CLASS - FORGE BUS");
             LOGGER.info("LOOT TABLE: {}", event.getTable().getLootTableId());
         }
     }
